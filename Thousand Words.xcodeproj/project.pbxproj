@@ -22,6 +22,8 @@
 		C1B8984A184D8FF100B9ED6B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1B8982E184D8FF100B9ED6B /* CoreData.framework */; };
 		C1B89852184D8FF100B9ED6B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C1B89850184D8FF100B9ED6B /* InfoPlist.strings */; };
 		C1B89854184D8FF100B9ED6B /* Thousand_WordsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B89853184D8FF100B9ED6B /* Thousand_WordsTests.m */; };
+		C1B8985E184D918C00B9ED6B /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1B8985D184D918C00B9ED6B /* Storyboard.storyboard */; };
+		C1B89861184D923200B9ED6B /* TWAlbumTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B89860184D923200B9ED6B /* TWAlbumTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,9 @@
 		C1B8984F184D8FF100B9ED6B /* Thousand WordsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Thousand WordsTests-Info.plist"; sourceTree = "<group>"; };
 		C1B89851184D8FF100B9ED6B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C1B89853184D8FF100B9ED6B /* Thousand_WordsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Thousand_WordsTests.m; sourceTree = "<group>"; };
+		C1B8985D184D918C00B9ED6B /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		C1B8985F184D923200B9ED6B /* TWAlbumTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWAlbumTableViewController.h; sourceTree = "<group>"; };
+		C1B89860184D923200B9ED6B /* TWAlbumTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWAlbumTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,8 +120,9 @@
 		C1B89830184D8FF100B9ED6B /* Thousand Words */ = {
 			isa = PBXGroup;
 			children = (
-				C1B89839184D8FF100B9ED6B /* TWAppDelegate.h */,
-				C1B8983A184D8FF100B9ED6B /* TWAppDelegate.m */,
+				C1B8985D184D918C00B9ED6B /* Storyboard.storyboard */,
+				C1B8985F184D923200B9ED6B /* TWAlbumTableViewController.h */,
+				C1B89860184D923200B9ED6B /* TWAlbumTableViewController.m */,
 				C1B8983F184D8FF100B9ED6B /* Images.xcassets */,
 				C1B8983C184D8FF100B9ED6B /* Thousand_Words.xcdatamodeld */,
 				C1B89831184D8FF100B9ED6B /* Supporting Files */,
@@ -127,6 +133,8 @@
 		C1B89831184D8FF100B9ED6B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C1B89839184D8FF100B9ED6B /* TWAppDelegate.h */,
+				C1B8983A184D8FF100B9ED6B /* TWAppDelegate.m */,
 				C1B89832184D8FF100B9ED6B /* Thousand Words-Info.plist */,
 				C1B89833184D8FF100B9ED6B /* InfoPlist.strings */,
 				C1B89836184D8FF100B9ED6B /* main.m */,
@@ -231,6 +239,7 @@
 			files = (
 				C1B89835184D8FF100B9ED6B /* InfoPlist.strings in Resources */,
 				C1B89840184D8FF100B9ED6B /* Images.xcassets in Resources */,
+				C1B8985E184D918C00B9ED6B /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +260,7 @@
 			files = (
 				C1B89837184D8FF100B9ED6B /* main.m in Sources */,
 				C1B8983B184D8FF100B9ED6B /* TWAppDelegate.m in Sources */,
+				C1B89861184D923200B9ED6B /* TWAlbumTableViewController.m in Sources */,
 				C1B8983E184D8FF100B9ED6B /* Thousand_Words.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
