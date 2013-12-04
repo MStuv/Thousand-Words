@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C1B6C89F184ED1690013E9E0 /* TWCoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B6C89E184ED1690013E9E0 /* TWCoreDataHelper.m */; };
 		C1B89829184D8FF100B9ED6B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1B89828184D8FF100B9ED6B /* Foundation.framework */; };
 		C1B8982B184D8FF100B9ED6B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1B8982A184D8FF100B9ED6B /* CoreGraphics.framework */; };
 		C1B8982D184D8FF100B9ED6B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1B8982C184D8FF100B9ED6B /* UIKit.framework */; };
@@ -38,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C1B6C89D184ED1690013E9E0 /* TWCoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWCoreDataHelper.h; sourceTree = "<group>"; };
+		C1B6C89E184ED1690013E9E0 /* TWCoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWCoreDataHelper.m; sourceTree = "<group>"; };
 		C1B89825184D8FF000B9ED6B /* Thousand Words.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Thousand Words.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1B89828184D8FF100B9ED6B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C1B8982A184D8FF100B9ED6B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -126,6 +129,8 @@
 				C1B8985D184D918C00B9ED6B /* Storyboard.storyboard */,
 				C1B8985F184D923200B9ED6B /* TWAlbumTableViewController.h */,
 				C1B89860184D923200B9ED6B /* TWAlbumTableViewController.m */,
+				C1B6C89D184ED1690013E9E0 /* TWCoreDataHelper.h */,
+				C1B6C89E184ED1690013E9E0 /* TWCoreDataHelper.m */,
 				C1B89862184D971F00B9ED6B /* Album.h */,
 				C1B89863184D971F00B9ED6B /* Album.m */,
 				C1B8983F184D8FF100B9ED6B /* Images.xcassets */,
@@ -268,6 +273,7 @@
 				C1B89861184D923200B9ED6B /* TWAlbumTableViewController.m in Sources */,
 				C1B89864184D971F00B9ED6B /* Album.m in Sources */,
 				C1B8983E184D8FF100B9ED6B /* Thousand_Words.xcdatamodeld in Sources */,
+				C1B6C89F184ED1690013E9E0 /* TWCoreDataHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,6 +474,7 @@
 				C1B89859184D8FF100B9ED6B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C1B8985A184D8FF100B9ED6B /* Build configuration list for PBXNativeTarget "Thousand WordsTests" */ = {
 			isa = XCConfigurationList;
@@ -476,6 +483,7 @@
 				C1B8985C184D8FF100B9ED6B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

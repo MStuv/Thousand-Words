@@ -8,6 +8,7 @@
 
 #import "TWAlbumTableViewController.h"
 #import "Album.h"
+#import "TWCoreDataHelper.h"
 
 /// conform to UIAlertViewDelegate in .m file makes the conform delegate private and not accessable from other classes
 @interface TWAlbumTableViewController () <UIAlertViewDelegate>
@@ -45,11 +46,43 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+/// This method will be called each time that the view appears. (viewDidLoad is only called on the initial load of the view so it will not be called if the view is being returned to from another view)
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    /// NSFetchRequest object is used to get the entity from CoreData. Fetch the Entity named Album
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Album"];
+    
+    /// once the fetch data begins, sortDescriptor will sort the fetched data by the date the objects were created using the date parameter.
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]];
+    
+    /// create an NSError instance
+    NSError *error = nil;
+    
+    /** Create an array from the sorted fetched data using the executeFetchRequest: method of managedObjectContext, with an error object so that if an error occurs, it will be set to the NSError instance and we can view and debug any errors.
+    
+    • executeFetchRequest: is being called on the context object that is returned from the TWCoreDataHelper class method: managedObjectContext.
+     
+    • We created the TWCoreDataHelper class to refactor the reuse of creating a NSManagedObjectContext object and setting the value to the UIApplication sharedApplication delegate. */
+    NSArray *fetchedAlbums = [[TWCoreDataHelper managedObjectContext]
+                              executeFetchRequest:fetchRequest error:&error];
+    
+    /// set the mutableArray albums equal to a mutableCopy of the fetchedAlbums array.
+    self.albums = [fetchedAlbums mutableCopy];
+    
+    /// reload the tableView data to reflect the data that was fetched.
+    [self.tableView reloadData];
+}
+
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 
 #pragma mark - IBAction Methods
@@ -70,14 +103,16 @@
 
 #pragma mark - Helper Methods
 
+/// Method called when creating a new Album instance
 -(Album *)albumWithName:(NSString *)name
 {
-    /// retreives the delegate from the app's TWAppDelegate.
-    /// An app can only have one UIApplication so we are sharing the delegate.
-    id delegate = [[UIApplication sharedApplication] delegate];
-    
-    /// Each NSManagedObject belongs to only one MSManagedObject Context - the context is responsible for managing the NSManagedObject.
-    NSManagedObjectContext *context = [delegate managedObjectContext];
+    /** Each NSManagedObject belongs to only one MSManagedObject Context - the context is responsible for managing the NSManagedObject.
+        
+        • context is being set to the returned value of the TWCoreDataHelper class method: managedObjectContext. 
+            
+        • We created the TWCoreDataHelper class to refactor the reuse of creating a NSManagedObjectContext object and setting the value to the UIApplication sharedApplication delegate.
+    */
+    NSManagedObjectContext *context = [TWCoreDataHelper managedObjectContext];
     
     /** Create a new persistent Album object using the class method 'insertNewObjectForEntityForName'.
         - This is a class method on NSEntityDescription that takes bouth the entities name and a context (or scratchpad)
