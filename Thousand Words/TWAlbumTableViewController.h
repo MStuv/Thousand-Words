@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TWAlbumTableViewController : UITableViewController
+@interface TWAlbumTableViewController : UITableViewController 
 
 @property (strong, nonatomic) NSMutableArray *albums;
 
+
+- (IBAction)addAlbumBarButtonItemPressed:(UIBarButtonItem *)sender;
 @end

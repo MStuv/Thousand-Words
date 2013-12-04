@@ -8,7 +8,8 @@
 
 #import "TWAlbumTableViewController.h"
 
-@interface TWAlbumTableViewController ()
+/// conform to UIAlertViewDelegate in .m file makes the conform delegate private and not accessable from other classes
+@interface TWAlbumTableViewController () <UIAlertViewDelegate>
 
 @end
 
@@ -20,6 +21,26 @@
     if (!_albums) _albums = [[NSMutableArray alloc] init];
     return _albums;
 }
+
+
+
+
+
+
+- (IBAction)addAlbumBarButtonItemPressed:(UIBarButtonItem *)sender {
+    
+    /// instance of UIAlertView - with delegate: set to self.
+    UIAlertView *newAlbumAlertView = [[UIAlertView alloc] initWithTitle:@"Enter New Album Name" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Add", nil];
+    
+    /// UIAlertView method that sets a alertViewStyle... in this case a plain textInput
+    /// This plain textInput will put a textField in the alertView to allow the user to enter text
+    [newAlbumAlertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    
+    /// show alertView
+    [newAlbumAlertView show];
+}
+
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -45,6 +66,21 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - UIAlertView Delegate
+
+/// CLICK BUTTON AT INDEX Method - this delegate method is needed when 'otherButtonTitles:' is set to a string value. This will tell the alertView what to do when the other button is pressed
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    /// if the button pressed is buttonIndex 1...
+    if (buttonIndex == 1) {
+        
+        /// create an instance of NSString and set it to the text that was entered into the alertView
+        NSString *alertText = [alertView textFieldAtIndex:0].text;
+        
+        NSLog(@"My new album is %@", alertText);
+    }
 }
 
 #pragma mark - Table view data source
