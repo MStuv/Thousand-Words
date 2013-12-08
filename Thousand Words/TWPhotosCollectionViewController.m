@@ -11,6 +11,7 @@
 #import "Photo.h"
 #import "TWPictureDataTransformer.h"
 #import "TWCoreDataHelper.h"
+#import "TWPhotoDetailViewController.h"
 
 /// Privately... Conform to ImagePickerVC & NavigationC Delegates
 @interface TWPhotosCollectionViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -42,6 +43,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+}
+
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
     /// create an instance of NSSet (an unordered set of objects and can not include duplicate obects)
     /// the saved photos in CoreData are saved as NSSet objects
     NSSet *unorderedPhotos = self.album.photos;
@@ -54,12 +62,43 @@
     
     /// set the mutable array equal to a mutableCopy of the sortedPhotos array.
     self.photos = [sortedPhotos mutableCopy];
+    
+    /// Refresh collectionView
+    [self.collectionView reloadData];
 }
+
+
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    /// make sure we have the correct identifier
+    if ([segue.identifier isEqualToString:@"Detail Segue"]) {
+        
+        NSLog(@"%@", segue.identifier);
+        
+        /// make sure we have the correct destinationVC by checking the class of the destinationVC
+        if ([segue.destinationViewController isKindOfClass:[TWPhotoDetailViewController class]]) {
+            
+            NSLog(@"%@", [segue.destinationViewController class]);
+            
+            /// create an instance of TWPhotoDetailVC and set it's value to the destinationVC
+            TWPhotoDetailViewController *targetVC = segue.destinationViewController;
+            /// create an instance of NSIndexPath and set it's value to the collectionView's method indexPathsForSelectedItems - at the last Object.
+            NSIndexPath *indexPath = [[self.collectionView indexPathsForSelectedItems] lastObject];
+            /// create instance of Photo and set to the object at the indexPath.row of the photos array
+            Photo *selectedPhoto = self.photos[indexPath.row];
+            /// set the selectedPhoto property from the destinationVC to the currentVC's photo property. w
+            targetVC.photo = selectedPhoto;
+        }
+    }
 }
 
 
