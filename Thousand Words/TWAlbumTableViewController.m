@@ -9,6 +9,7 @@
 #import "TWAlbumTableViewController.h"
 #import "Album.h"
 #import "TWCoreDataHelper.h"
+#import "TWPhotosCollectionViewController.h"
 
 /// conform to UIAlertViewDelegate in .m file makes the conform delegate private and not accessable from other classes
 @interface TWAlbumTableViewController () <UIAlertViewDelegate>
@@ -38,10 +39,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
+    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
@@ -61,10 +62,10 @@
     NSError *error = nil;
     
     /** Create an array from the sorted fetched data using the executeFetchRequest: method of managedObjectContext, with an error object so that if an error occurs, it will be set to the NSError instance and we can view and debug any errors.
-    
-    • executeFetchRequest: is being called on the context object that is returned from the TWCoreDataHelper class method: managedObjectContext.
      
-    • We created the TWCoreDataHelper class to refactor the reuse of creating a NSManagedObjectContext object and setting the value to the UIApplication sharedApplication delegate. */
+     • executeFetchRequest: is being called on the context object that is returned from the TWCoreDataHelper class method: managedObjectContext.
+     
+     • We created the TWCoreDataHelper class to refactor the reuse of creating a NSManagedObjectContext object and setting the value to the UIApplication sharedApplication delegate. */
     NSArray *fetchedAlbums = [[TWCoreDataHelper managedObjectContext]
                               executeFetchRequest:fetchRequest error:&error];
     
@@ -107,16 +108,16 @@
 -(Album *)albumWithName:(NSString *)name
 {
     /** Each NSManagedObject belongs to only one MSManagedObject Context - the context is responsible for managing the NSManagedObject.
-        
-        • context is being set to the returned value of the TWCoreDataHelper class method: managedObjectContext. 
-            
-        • We created the TWCoreDataHelper class to refactor the reuse of creating a NSManagedObjectContext object and setting the value to the UIApplication sharedApplication delegate.
-    */
+     
+     • context is being set to the returned value of the TWCoreDataHelper class method: managedObjectContext.
+     
+     • We created the TWCoreDataHelper class to refactor the reuse of creating a NSManagedObjectContext object and setting the value to the UIApplication sharedApplication delegate.
+     */
     NSManagedObjectContext *context = [TWCoreDataHelper managedObjectContext];
     
     /** Create a new persistent Album object using the class method 'insertNewObjectForEntityForName'.
-        - This is a class method on NSEntityDescription that takes bouth the entities name and a context (or scratchpad)
-        - Entity Name is set the the Entity name created in the xcdatamodeld.*/
+     - This is a class method on NSEntityDescription that takes bouth the entities name and a context (or scratchpad)
+     - Entity Name is set the the Entity name created in the xcdatamodeld.*/
     Album *album = [NSEntityDescription insertNewObjectForEntityForName:@"Album" inManagedObjectContext:context];
     
     /// with the NSManagedObject subclass, we can set its attributes exactly as we would properties.
@@ -185,54 +186,63 @@
 }
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ }
+ else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+ {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
-/*
+
 #pragma mark - Navigation
 
 // In a story board-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    /// Check to makes sure we are using the correct segue
+    if ([segue.identifier isEqualToString:@"Album Chosen"]) {
+        /// Check to make sure that the distinationVC is of the correct class
+        if  ([segue.destinationViewController isKindOfClass:[TWPhotosCollectionViewController class]]) {
+            /// create instance of NSIndexPath and set to the tableView method indexPathForSelectedRow
+            NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+            /// create instance of TWPhotosCollectionBV and set it equal to the segue.destinationVC
+            TWPhotosCollectionViewController *targetViewController = segue.destinationViewController;
+            /// set the album property of the TWPhotoCollectionVC to equal the albums array at path.row
+            targetViewController.album = self.albums[path.row];
+        }
+    }
 }
 
- */
 
 @end

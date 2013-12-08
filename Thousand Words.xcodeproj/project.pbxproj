@@ -31,7 +31,6 @@
 		C1B89854184D8FF100B9ED6B /* Thousand_WordsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B89853184D8FF100B9ED6B /* Thousand_WordsTests.m */; };
 		C1B8985E184D918C00B9ED6B /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1B8985D184D918C00B9ED6B /* Storyboard.storyboard */; };
 		C1B89861184D923200B9ED6B /* TWAlbumTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B89860184D923200B9ED6B /* TWAlbumTableViewController.m */; };
-		C1B89864184D971F00B9ED6B /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B89863184D971F00B9ED6B /* Album.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,8 +78,6 @@
 		C1B8985D184D918C00B9ED6B /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		C1B8985F184D923200B9ED6B /* TWAlbumTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWAlbumTableViewController.h; sourceTree = "<group>"; };
 		C1B89860184D923200B9ED6B /* TWAlbumTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWAlbumTableViewController.m; sourceTree = "<group>"; };
-		C1B89862184D971F00B9ED6B /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Album.h; path = ../Album.h; sourceTree = "<group>"; };
-		C1B89863184D971F00B9ED6B /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Album.m; path = ../Album.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,8 +171,6 @@
 				C1B89860184D923200B9ED6B /* TWAlbumTableViewController.m */,
 				C1B6C89D184ED1690013E9E0 /* TWCoreDataHelper.h */,
 				C1B6C89E184ED1690013E9E0 /* TWCoreDataHelper.m */,
-				C1B89862184D971F00B9ED6B /* Album.h */,
-				C1B89863184D971F00B9ED6B /* Album.m */,
 				C1B8983F184D8FF100B9ED6B /* Images.xcassets */,
 				C13311D31850173C001819AB /* CoreData */,
 				C13311CC18500159001819AB /* Images */,
@@ -320,7 +315,6 @@
 				C13311CF1850170F001819AB /* Photo.m in Sources */,
 				C1B8983B184D8FF100B9ED6B /* TWAppDelegate.m in Sources */,
 				C1B89861184D923200B9ED6B /* TWAlbumTableViewController.m in Sources */,
-				C1B89864184D971F00B9ED6B /* Album.m in Sources */,
 				C13311D6185017DE001819AB /* TWPictureDataTransformer.m in Sources */,
 				C1B8983E184D8FF100B9ED6B /* Thousand_Words.xcdatamodeld in Sources */,
 				C1B6C89F184ED1690013E9E0 /* TWCoreDataHelper.m in Sources */,

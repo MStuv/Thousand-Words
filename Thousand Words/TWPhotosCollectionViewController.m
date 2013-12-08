@@ -42,6 +42,18 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    /// create an instance of NSSet (an unordered set of objects and can not include duplicate obects)
+    /// the saved photos in CoreData are saved as NSSet objects
+    NSSet *unorderedPhotos = self.album.photos;
+    
+    /// create an instance of NSSortDescriptor and set to sort the key 'date' and set ascending to YES
+    NSSortDescriptor *dateDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
+    
+    /// create can instance of NSArray and load with the unorderedPhotos objects sorted using the dateDescriptor.
+    NSArray *sortedPhotos = [unorderedPhotos sortedArrayUsingDescriptors:@[dateDescriptor]];
+    
+    /// set the mutable array equal to a mutableCopy of the sortedPhotos array.
+    self.photos = [sortedPhotos mutableCopy];
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,6 +82,7 @@
     [self presentViewController:picker animated:YES completion:nil];
 }
 
+
 #pragma mark - Helper Methods
 
 /// method will take a UIImage and Return a Photo instance
@@ -94,7 +107,6 @@
     }
     return photo;
 }
-
 
 
 #pragma mark - UICollectionView DataSource
