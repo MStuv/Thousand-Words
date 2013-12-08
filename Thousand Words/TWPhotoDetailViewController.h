@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-/// Class Forward Declaration??
+// Class Forward Declaration??
 @class Photo;
 
 @interface TWPhotoDetailViewController : UIViewController

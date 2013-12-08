@@ -12,15 +12,15 @@
 
 +(NSManagedObjectContext *)managedObjectContext
 {
-    /// Create a NSManagedObjectContext instance and sit its value to blank
+    // Create a NSManagedObjectContext instance and sit its value to blank
     NSManagedObjectContext *context = nil;
     
     id delegate = [[UIApplication sharedApplication] delegate];
     
-    /// test to make sure that the delegate variable exsists
+    // test to make sure that the delegate variable exsists
     if ([delegate performSelector:@selector(managedObjectContext)]) {
         
-        /// set context to the delegate
+        // set context to the delegate
         context = [delegate managedObjectContext];
     }
     

@@ -8,6 +8,7 @@
 
 #import "TWPhotoDetailViewController.h"
 #import "Photo.h"
+#import "TWFiltersCollectionViewController.h"
 
 @interface TWPhotoDetailViewController ()
 
@@ -44,6 +45,24 @@
 }
 
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    /// if correct segue identifier
+    if ([segue.identifier isEqualToString:@"Filter Segue"]) {
+        
+        /// if correct destinationVC class
+        if ([segue.destinationViewController isKindOfClass:[TWFiltersCollectionViewController class]]) {
+            
+            /// create instance of TWFilterCollectionVC and set value to segue.destinationVC
+            TWFiltersCollectionViewController *targetVC = segue.destinationViewController;
+            
+            /// set destinationVC's photo property equal to currentVC's photo property
+            targetVC.photo = self.photo;
+        }
+    }
+}
+
+
 
 - (IBAction)addFiliterButtonPressed:(UIButton *)sender {
     
@@ -55,9 +74,9 @@
     
     [[self.photo managedObjectContext] deleteObject:self.photo];
     
-    /// WHEN USING SIMULATOR: for CoreData to save the deleted image and we must include the following code that saves to CoreData
+    // WHEN USING SIMULATOR: for CoreData to save the deleted image and we must include the following code that saves to CoreData
     
-    /// WHEN ON DEVICE: the following is not needed if the code is running on a device. CoreData will auto save that the photo is deleted. The following code is only needed when using the simulator.
+    // WHEN ON DEVICE: the following is not needed if the code is running on a device. CoreData will auto save that the photo is deleted. The following code is only needed when using the simulator.
     NSError *error = nil;
     [[self.photo managedObjectContext] save:&error];
     if (error) {

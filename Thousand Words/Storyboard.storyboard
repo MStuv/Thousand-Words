@@ -110,6 +110,7 @@
                                 </state>
                                 <connections>
                                     <action selector="addFiliterButtonPressed:" destination="HAX-4L-8JP" eventType="touchUpInside" id="uqG-if-qvi"/>
+                                    <segue destination="gPw-KA-xV8" kind="push" identifier="Filter Segue" id="h7W-9T-duR"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6aK-Mp-mDq">
@@ -133,6 +134,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k2z-HY-h9Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1487" y="81"/>
+        </scene>
+        <!--Filters Collection View Controller-->
+        <scene sceneID="ews-ha-Xzj">
+            <objects>
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="gPw-KA-xV8" customClass="TWFiltersCollectionViewController" sceneMemberID="viewController">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="Nn3-pT-Kkq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cGG-n6-4wI">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ZdM-Oc-kUn" customClass="TWPhotoCollectionViewCell">
+                                <rect key="frame" x="0.0" y="64" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="gPw-KA-xV8" id="MfS-e9-MYP"/>
+                            <outlet property="delegate" destination="gPw-KA-xV8" id="lSF-b1-FBu"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="2Sd-si-xSs"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dsh-Cd-s2D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1866" y="81"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JeO-xk-N7q">
