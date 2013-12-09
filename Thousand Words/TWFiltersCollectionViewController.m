@@ -64,22 +64,14 @@
 +(NSArray *)photoFilters
 {
     CIFilter *sepia = [CIFilter filterWithName:@"CISepiaTone" keysAndValues:nil];
-    
     CIFilter *blur = [CIFilter filterWithName:@"CIGaussianBlur" keysAndValues:nil];
-    
     CIFilter *colorClamp = [CIFilter filterWithName:@"CIColorClamp" keysAndValues:@"inputMaxComponents", [CIVector vectorWithX:0.9 Y:0.9 Z:0.9 W:0.9], @"inputMinComponents", [CIVector vectorWithX:0.2 Y:0.2 Z:0.2 W:0.2], nil];
     CIFilter *instant = [CIFilter filterWithName:@"CIPhotoEffectInstant" keysAndValues:nil];
-    
     CIFilter *noir = [CIFilter filterWithName:@"CIPhotoEffectNoir" keysAndValues:nil];
-    
     CIFilter *vignette = [CIFilter filterWithName:@"CIVignetteEffect" keysAndValues:nil];
-    
     CIFilter *colorControls = [CIFilter filterWithName:@"CIColorControls" keysAndValues:kCIInputSaturationKey, @0.5, nil];
-    
     CIFilter *transfer = [CIFilter filterWithName:@"CIPhotoEffectTransfer" keysAndValues:nil];
-    
     CIFilter *unsharpen = [CIFilter filterWithName:@"CIUnsharpMask" keysAndValues:nil];
-    
     CIFilter *monochrome = [CIFilter filterWithName:@"CIColorMonochrome" keysAndValues:nil];
     
     NSArray *allFilters = @[sepia, blur, colorClamp, instant, noir, vignette, colorControls, transfer, unsharpen, monochrome];
@@ -121,8 +113,21 @@
     TWPhotoCollectionViewCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     
     cell.backgroundColor = [UIColor whiteColor];
-    cell.imageView.image = [self filteredImageFromImage:self.photo.image andFilter:self.filters[indexPath.row]];
     
+    /// WE ARE APPLYING THE FILTER TO THE IMAGE USING A BLOCK - ON ANOTHER THREAD
+    /// Created a queue and used a function to create a name (this is a C Function so no @ for
+    dispatch_queue_t filterQueue = dispatch_queue_create("filter queue", NULL);
+    /// Push the queue onto another thread with a block
+    dispatch_async(filterQueue, ^{
+        UIImage *filterImage = [self filteredImageFromImage:self.photo.image andFilter:self.filters[indexPath.row]];
+        
+        /// WE ARE ASSIGNING THE FILTERED IMAGE TO THE CELL's IMAGEVIEW USING A BLOCK - BACK ON THE MAIN THREAD
+        /** We now push the change of the cell.imageView.image back to the main thread and set the image.
+         (      We do this because we have to do all UI changes on the main thread) */
+        dispatch_async(dispatch_get_main_queue(), ^{
+            cell.imageView.image = filterImage;
+        });
+    });
     
     return cell;
 }
@@ -142,13 +147,19 @@
     
     self.photo.image = selectedCell.imageView.image;
     
-    NSError *error = nil;
+    /// TO FIX BUG THAT ALLOWS USER TO SELECT A COLLECTIONCELL BEFORE THE FILTER LOADS - GIVING THE USER A BLANK PHOTO THAT ALSO SAVES THE BLANK TO COREDATA
     
-    if (![[self.photo managedObjectContext] save:&error]) {
-        NSLog(@"%@", error);
+    /// Create an if statement to comfirm the the photo has an image before saving to CoreData
+    if (self.photo.image) {
+        
+        NSError *error = nil;
+        
+        if (![[self.photo managedObjectContext] save:&error]) {
+            NSLog(@"%@", error);
+        }
+        
+        [self.navigationController popViewControllerAnimated:YES];
     }
-    
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
